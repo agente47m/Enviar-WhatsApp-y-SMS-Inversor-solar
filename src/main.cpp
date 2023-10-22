@@ -5,7 +5,7 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_GFX.h>
-
+#include <WiFiManager.h>
 
 //INICIO VARIABLES DE PANTALLA OLED
 
@@ -33,8 +33,14 @@ ModbusMaster node;
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 void printOLED(String marca,String inversor, String sim);
+void printOLEDmensaje(String msj);
+
 
 void setup() {
+
+
+//CONFIGURACION DE LOS PUERTOS SERIAL
+
   // Inicializa la comunicación Serie para la depuración
   Serial.begin(9600);
   // Inicializa la comunicación RS485 con la placa XY485
@@ -42,10 +48,36 @@ void setup() {
   // Inicializa el objeto ModbusMaster
   node.begin(DIR_ID_MODBUS, Serial2); // El número 3 es la dirección del dispositivo Modbus
 
+//FIN CONFIGURACION DE LOS PUERTOS SERIAL
+
+  
+//CONFIGURACION DE LA PANTALLA OLED SSD1306  
+  
   if(!display.begin(SSD1306_SWITCHCAPVCC,SCREEN_ADDRESS)){
     Serial.println("FALLO EN PANTALLA");
   }
+// FIN CONFIGURACION DE LA PANTALLA OLED SSD1306  
+
+
+
+//CONFIGURACION DE LA WIFI
+  WiFi.mode(WIFI_STA);
+  WiFiManager wm;
+  bool res;
+  res=wm.autoConnect("AP-4705","123456789");
+  if (!res)
+  {
+    Serial.println("Fallo de conexion");
+    printOLEDmensaje("Esperando WIFI");
+  }
+  else{
+    Serial.println("conectado");
+    printOLEDmensaje("CARGANDO...");
+
+  }
   
+
+
 }
 
 void loop() {
@@ -68,7 +100,8 @@ void loop() {
     comRs485="ERROR";
   }
 
-  printOLED("SALICRU",comRs485,"ERROR");
+  printOLED("SALICRU",comRs485,"ERROR"); 
+  
   
   delay(1000); // Espera un segundo antes de realizar la siguiente lectura
 }
@@ -93,3 +126,12 @@ void printOLED(String marca,String inversor, String sim)
 
   display.display();
 }
+void printOLEDmensaje(String msj){
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 30);
+  display.println(msj);
+  display.display();
+}
+
