@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web</title>
+    <style>
+        body {
+            background-color: #34495e; /* Fondo  oscuro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif; /* Cambio de tipografía */
+        }
+
+        .container {
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #fff; /* Tarjeta blanca */
+            border-radius: 20px; /* Bordes redondeados */
+            display: flex;
+            width: 80%;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .left {
+            flex: 1;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            margin: 10px 0;
+        }
+
+        .checklist i {
+            color: #27ae60; /* Cambio de color para el ícono de verificación */
+            margin-right: 10px;
+        }
+
+        input {
+            width: 80%; /* Ancho reducido */
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px; /* Cambio de tamaño de fuente */
+        }
+
+        button {
+            background-color: #ff7f50; /* Color anaranjado */
+            color: #fff; /* Color de texto para el botón */
+            border: none;
+            border-radius: 5px; /* Bordes menos redondeados */
+            padding: 10px;
+            font-size: 16px; /* Cambio de tamaño de fuente */
+            cursor: pointer;
+            margin-top: 15px; /* Separación de 15px por arriba */
+        }
+
+        button:hover {
+            background-color: #ff6347; /* Cambio de color de fondo en el hover */
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px; /* Separación de 15px a la derecha de la imagen */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px; /* Bordes redondeados */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="left">
+                <h2>Configuración</h2>
+                <p>Proceso de configuración de tu dispositivo</p>
+                <ul class="checklist">
+                    <li><i class="fa fa-check"></i> Fácil de configurar</li>
+                    <li><i class="fa fa-check"></i> Rápido</li>
+                    <li><i class="fa fa-check"></i> Acceso 100% local</li>
+                </ul>
+                <form>
+                    <input type="text" id="marca" placeholder="Marca Inversor">
+                    <input type="text" id="direccion" placeholder="Dirección Modbus Hz">
+                    <input type="text" id="telefono" placeholder="Teléfono">
+                    <button type="submit">Guardar Cambios</button>
+                </form>
+            </div>
+            <div class="right">
+                <img src="tu_imagen.webp" alt="Imagen">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
