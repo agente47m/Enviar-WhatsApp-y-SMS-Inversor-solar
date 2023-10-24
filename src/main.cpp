@@ -6,7 +6,8 @@
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <WiFiManager.h>
-
+#include <HTTPClient.h>
+#include <UrlEncode.h>
 //INICIO VARIABLES DE PANTALLA OLED
 
 #define SCREEN_WIDTH 128
@@ -24,7 +25,7 @@
 #define ADDRESS_MODBUS 11015
 //FIN VARIABLES DE PANTALLA OLED
 
-#define NUM_TELEFONO 666666666
+#define NUM_TELEFONO_SMS 666666666
 
 
 
@@ -32,9 +33,19 @@
 ModbusMaster node;
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
+//VARIABLES GLOBALES Y FUNCIONES
+
+bool conexionWithInv=false;
+bool isSendMsg=false;
+String phoneNumberWhatapp = "+34648749355";
+String apiKey = "7327197";
+
 void printOLED(String marca,String inversor, String sim);
 void printOLEDmensaje(String msj);
+void sendWhatapp(String msg);
 
+
+//FIN VARIABLES GLOBALES 
 
 void setup() {
 
@@ -58,8 +69,6 @@ void setup() {
   }
 // FIN CONFIGURACION DE LA PANTALLA OLED SSD1306  
 
-
-
 //CONFIGURACION DE LA WIFI
   WiFi.mode(WIFI_STA);
   WiFiManager wm;
@@ -72,19 +81,20 @@ void setup() {
   }
   else{
     Serial.println("conectado");
-    printOLEDmensaje("CARGANDO...");
+    printOLEDmensaje("Cargando...");
 
   }
   
 
-
 }
 
 void loop() {
- uint8_t result;
+  uint8_t result;
   uint16_t data;
   static String comRs485 = "";
 
+//bool conexionWithInv=false;
+//bool isSendMsg=false;
 
   // Realiza una lectura de un registro Modbus (por ejemplo, el registro 0x0001)
   result = node.readHoldingRegisters(ADDRESS_MODBUS, 1);
@@ -94,15 +104,24 @@ void loop() {
     Serial.print("Frecuencia de la red: ");
     Serial.println(data);
     comRs485="OK";
+    conexionWithInv=true;
+    isSendMsg=false;
   } else {
     Serial.print("Error al leer el registro. Código de error: ");
     Serial.println(result);
     comRs485="ERROR";
+    //comprobaremos los estados para decidir si enviamos mensajes o no 
+
+    if(conexionWithInv==true && isSendMsg==false)// si estabamos conectado con el inversor
+    {
+      sendWhatapp("Fallo de alimentacion del inversor ");
+      isSendMsg=true;
+
+    }
   }
 
-  printOLED("SALICRU",comRs485,"ERROR"); 
-  
-  
+  //Serial.println("ip Serial:"+WiFi.localIP());
+  printOLED("ALICR",comRs485,"ERROR"); 
   delay(1000); // Espera un segundo antes de realizar la siguiente lectura
 }
 
@@ -116,13 +135,21 @@ void printOLED(String marca,String inversor, String sim)
   //-----------------
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(0, 30);
+  display.setCursor(0, 20);
   display.println("CONEX.INVER: "+inversor);
   //---------------------------------
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(0, 50);
+  display.setCursor(0, 30);
   display.println("CONEX.GSM: "+sim);
+  //-------------------------------
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 50);
+  //display.println("IP: "+WiFi.localIP());
+  display.println("IP: ");
+
+  //-------------------------------
 
   display.display();
 }
@@ -134,4 +161,35 @@ void printOLEDmensaje(String msj){
   display.println(msj);
   display.display();
 }
+void sendWhatapp(String msg)
+{
+ // Data to send with HTTP POST
+  String url = "https://api.callmebot.com/whatsapp.php?phone=" + phoneNumberWhatapp + "&apikey=" + apiKey + "&text=" + urlEncode(msg);    
+  HTTPClient http;
+  http.begin(url);
 
+  // Specify content-type header
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+  
+  // Send HTTP POST request
+  int httpResponseCode = http.POST(url);
+  if (httpResponseCode == 200){
+    Serial.print("Message sent successfully");
+  }
+  else{
+    Serial.println("Error sending the message");
+    Serial.print("HTTP response code: ");
+    Serial.println(httpResponseCode);
+  }
+
+  // Free resources
+  http.end();
+
+  //CODE FUNCTION
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 0);
+  display.println(msg);
+  display.display();
+}
