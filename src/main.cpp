@@ -39,10 +39,15 @@ bool conexionWithInv=false;
 bool isSendMsg=false;
 String phoneNumberWhatapp = "+34648749355";
 String apiKey = "7327197";
+WiFiManager wm;
+String IpAsignada="";
 
 void printOLED(String marca,String inversor, String sim);
 void printOLEDmensaje(String msj);
 void sendWhatapp(String msg);
+void resetSettingWifi();
+void printOLEDbienvenida();
+void printOLEDwhatapp();
 
 
 //FIN VARIABLES GLOBALES 
@@ -69,20 +74,22 @@ void setup() {
   }
 // FIN CONFIGURACION DE LA PANTALLA OLED SSD1306  
 
+printOLEDbienvenida();
+
 //CONFIGURACION DE LA WIFI
   WiFi.mode(WIFI_STA);
-  WiFiManager wm;
   bool res;
   res=wm.autoConnect("AP-4705","123456789");
   if (!res)
   {
     Serial.println("Fallo de conexion");
-    printOLEDmensaje("Esperando WIFI");
+    
   }
   else{
     Serial.println("conectado");
     printOLEDmensaje("Cargando...");
-
+    
+    IpAsignada=WiFi.localIP().toString();
   }
   
 
@@ -92,9 +99,6 @@ void loop() {
   uint8_t result;
   uint16_t data;
   static String comRs485 = "";
-
-//bool conexionWithInv=false;
-//bool isSendMsg=false;
 
   // Realiza una lectura de un registro Modbus (por ejemplo, el registro 0x0001)
   result = node.readHoldingRegisters(ADDRESS_MODBUS, 1);
@@ -120,8 +124,7 @@ void loop() {
     }
   }
 
-  //Serial.println("ip Serial:"+WiFi.localIP());
-  printOLED("ALICR",comRs485,"ERROR"); 
+  printOLED("SALICRU",comRs485,"ERROR"); 
   delay(1000); // Espera un segundo antes de realizar la siguiente lectura
 }
 
@@ -136,18 +139,18 @@ void printOLED(String marca,String inversor, String sim)
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(0, 20);
-  display.println("CONEX.INVER: "+inversor);
+  display.println(" > CONEX.INVER: "+inversor);
   //---------------------------------
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(0, 30);
-  display.println("CONEX.GSM: "+sim);
+  display.println(" > CONEX.GSM: "+sim);
   //-------------------------------
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(0, 50);
-  //display.println("IP: "+WiFi.localIP());
-  display.println("IP: ");
+ 
+  display.println("  IP:"+IpAsignada);
 
   //-------------------------------
 
@@ -192,4 +195,48 @@ void sendWhatapp(String msg)
   display.setCursor(0, 0);
   display.println(msg);
   display.display();
+}
+
+void resetSettingWifi()
+{
+  wm.resetSettings();  
+}
+
+void printOLEDbienvenida(){
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 0);
+  display.println("Bienvenido");
+  //-----------------
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 20);
+  display.println(" Wifi no configurada ");
+  //---------------------
+  display.setCursor(0, 30);
+  display.println("1.Conec. wifi AP-4705");
+  display.setCursor(0, 40);
+  display.println("2.Pass wifi:123456789");
+  display.setCursor(0, 50);
+  display.println("3.Conectate y Renicie");
+ 
+
+  display.display();
+
+}
+
+void printOLEDwhatapp()
+{
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 30);
+  display.println("       Enviando");
+  //---------------------
+  display.setCursor(0, 40);
+  display.println("       Whatapp       ");
+
+  display.display();
+  delay(2000);
 }

@@ -46,6 +46,8 @@
         .checklist {
             list-style: none;
             padding: 0;
+            text-align: center;
+            margin-top: 27px;
         }
 
         .checklist li {
@@ -64,6 +66,12 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px; /* Cambio de tamaño de fuente */
+            
+        }
+
+        .form{
+            
+            margin-left: 35px;            
         }
 
         button {
@@ -91,8 +99,21 @@
 
         img {
             max-width: 100%;
-            height: auto;
+            height: 100%;
             border-radius: 20px; /* Bordes redondeados */
+        }
+        .apikey{
+            color:#ccc;
+            cursor: pointer;
+
+        }
+        .apikey:hover{
+            color:#34495e;
+        }
+
+        .apikeyDiv{
+            margin-top: 10px;
+            margin-left: 30px;
         }
     </style>
 </head>
@@ -104,15 +125,22 @@
                 <p>Proceso de configuración de tu dispositivo</p>
                 <ul class="checklist">
                     <li><i class="fa fa-check"></i> Fácil de configurar</li>
-                    <li><i class="fa fa-check"></i> Rápido</li>
                     <li><i class="fa fa-check"></i> Acceso 100% local</li>
                 </ul>
-                <form>
-                    <input type="text" id="marca" placeholder="Marca Inversor">
+                <form class="form">
+                    <input type="text" id="marca" placeholder="Marca Inversor" maxlength="21">
                     <input type="text" id="direccion" placeholder="Dirección Modbus Hz">
-                    <input type="text" id="telefono" placeholder="Teléfono">
+                    <input type="tel" id="telefono" placeholder="Teléfono">
+                    <input type="text" id="apikey" placeholder="API KEY Whatapp Bot">
+
+
                     <button type="submit">Guardar Cambios</button>
                 </form>
+                <div class="apikeyDiv">
+                    <a href="https://www.callmebot.com/blog/free-api-signal-send-messages/" class="apikey"><small>*Donde consigo el APIKEY</small></a>
+                </div>
+                
+
             </div>
             <div class="right">
                 <img src="tu_imagen.webp" alt="Imagen">
