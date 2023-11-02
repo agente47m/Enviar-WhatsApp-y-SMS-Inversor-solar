@@ -128,23 +128,16 @@
                     <li><i class="fa fa-check"></i> Fácil de configurar</li>
                     <li><i class="fa fa-check"></i> Acceso 100% local</li>
                 </ul>
-                <form class="form">
-                    <input type="text" id="marca" placeholder="Marca Inversor" maxlength="21">
-                    <input type="text" id="direccion" placeholder="Dirección Modbus Hz">
-                    <input type="tel" id="telefono" placeholder="Teléfono">
-                    <input type="text" id="apikey" placeholder="API KEY Whatapp Bot">
-
-
-                    <button type="submit">Guardar Cambios</button>
+                <form class="form" action="/settings" method='GET'>
+                    <input type="text" name="marca" id="marca" placeholder="Marca Inversor" maxlength="21" required>
+                    <input type="text" name="direccion" id="direccion" placeholder="Dirección Modbus Hz" required>
+                    <input type="tel" name="telefono" id="telefono" placeholder="Teléfono" required>
+                    <input type="text" name="apikey" id="apikey" placeholder="API KEY Whatapp Bot" required>
+                    <button name='SUBMIT' value='Submit' type="submit">Guardar Cambios</button>
                 </form>
                 <div class="apikeyDiv">
                     <a href="https://www.callmebot.com/blog/free-api-signal-send-messages/" class="apikey"><small>*Donde consigo el APIKEY</small></a>
                 </div>
-                
-
-            </div>
-            <div class="right">
-                <img src="COM.jpg" alt="Imagen">
             </div>
         </div>
     </div>
