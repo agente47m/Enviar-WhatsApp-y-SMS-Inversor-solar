@@ -125,12 +125,32 @@ void loop() {
   result = node.readHoldingRegisters(ADDRESS_MODBUS, 1);
   // Verifica si la lectura fue exitosa
   if (result == node.ku8MBSuccess) {
+  
     data = node.getResponseBuffer(0);
+
+    if (data==0)
+    {
+
+    Serial.print("Corte de corriente AC,: ");
+    Serial.println(data);
+    comRs485="ERROR";
+
+    if(conexionWithInv==true && isSendMsg==false)// si estabamos conectado con el inversor
+    {
+      sendWhatapp("Fallo de alimentacion del inversor ");
+      isSendMsg=true;
+
+    }
+
+    }else{
+    //data = node.getResponseBuffer(0);
     Serial.print("Frecuencia de la red: ");
     Serial.println(data);
     comRs485="OK";
     conexionWithInv=true;
     isSendMsg=false;
+    }
+    
   } else {
     Serial.print("Error al leer el registro. Código de error: ");
     Serial.println(result);
