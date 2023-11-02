@@ -23,8 +23,8 @@
 <li>convertidor TTL to RS485 modelo XY-K485 de la marca diymore</li>
 <li> Fuente de alimentación de 3 W marca HI-LINK </li>
 <li> PCB a medida (no es obligatorio para que funcione el proyecto)</li>
-
-<p><small> el módulo RS 435 tiene que ser el indicado más arriba, ya que este tiene el control de Bit implementado mediante hardware y no mediante software como son otros módulos más económicos </small></p>
+<br>
+<small> el módulo RS 435 tiene que ser el indicado más arriba, ya que este tiene el control de Bit implementado mediante hardware y no mediante software como son otros módulos más económicos </small>
 
 <h2> ensamblado del proyecto </h2>
 <p> en este apartado, veremos las particularidades que hay que llevar a cabo Para ensamblar la placa con éxito </p>
@@ -35,13 +35,13 @@
 ----------- Añadir fotografías_-------------
 <h2> funcionalidades del proyecto </h2>
 <p> aquí veremos la foto dades que tiene este proyecto al día de hoy: </p>
-<li> la primera vez que inicia, se genera un web server que te permite escanear las redes del Wi-Fi y escoger la que tú quieras guardandola para posteriormente utilizarla </li>
+<li> la primera vez que inicia, se genera un web server que te permite escanear las redes del Wi-Fi y escoger la que tú quieras guardandola para posteriormente utilizarla. CREDENCIALES POR DEFECTO SSI: AP-047 CONTRASEÑA:</li>
 <li> si la red Wi-Fi guardada desaparece o se cae el sistema se pondrá en modo emparejamiento y generará el web server mencionado anteriormente </li>
 <li> si la Wi-Fi está configurada correctamente generará un web server para configurar las direcciones Mob y el teléfono para el envío de WhatsApp y SMS </li>
 <li> cuando el inversor deja de recibir corriente de AC EL SISTEMA MANDA UN SMS O WHATSAPP .</li>
 <li> actualmente son los capaz de enviar WhatsApp próximamente la versión dos enviará SMS </li>
-
-<p><small> para dar de alta el teléfono de los avisos de WhatsApp revisar el siguiente enlace .</small></p>
+<br>
+<small> para dar de alta el teléfono de los avisos de WhatsApp revisar el siguiente enlace .</small>
 
 <h2> vídeos de demostración</h2>
 <p> podemos ver un vídeo de demostración donde se muestra como se configura la red Wi-Fi y como se ve el envío de WhatsApp </p>
