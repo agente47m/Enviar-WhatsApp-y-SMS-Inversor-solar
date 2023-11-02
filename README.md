@@ -6,7 +6,7 @@
 <p> Este proyecto está diseñado al ser compatible con cualquier inversor que utilice el protocolo RS485 RTU.</p>
 
 <p> Uno de los ejemplos de inversores solares compatibles pueden ser: </p>
-<li>Equinox 2 de la marca SALICRU</li>
+<li>SALICRU (Equinox 2)</li>
 <li>huawei</li>
 <li>fronius</li>
 <li>victron</li>
