@@ -35,7 +35,7 @@
 ----------- Añadir fotografías_-------------
 <h2> funcionalidades del proyecto </h2>
 <p> aquí veremos la foto dades que tiene este proyecto al día de hoy: </p>
-<li> la primera vez que inicia, se genera un web server que te permite escanear las redes del Wi-Fi y escoger la que tú quieras guardandola para posteriormente utilizarla. CREDENCIALES POR DEFECTO SSI: AP-047 CONTRASEÑA:</li>
+<li> la primera vez que inicia, se genera un web server que te permite escanear las redes del Wi-Fi y escoger la que tú quieras guardandola para posteriormente utilizarla. CREDENCIALES POR DEFECTO SSID: "AP-4705", CONTRASEÑA:"123456789"</li>
 <li> si la red Wi-Fi guardada desaparece o se cae el sistema se pondrá en modo emparejamiento y generará el web server mencionado anteriormente </li>
 <li> si la Wi-Fi está configurada correctamente generará un web server para configurar las direcciones Mob y el teléfono para el envío de WhatsApp y SMS </li>
 <li> cuando el inversor deja de recibir corriente de AC EL SISTEMA MANDA UN SMS O WHATSAPP .</li>
@@ -46,6 +46,9 @@
 <h2> vídeos de demostración</h2>
 <p> podemos ver un vídeo de demostración donde se muestra como se configura la red Wi-Fi y como se ve el envío de WhatsApp </p>
  
-
+<h2>IMPORTANTE</h2>
+<p> este sistema requiere que el inversor tenga puesta la dirección Mob número tres o cambiarlo en el código antes de subirlo </p>
+<p> este sistema es compatible con otros sistema de monitorizacion ya instalados </p>
+<p> este proyectos utiliza para monitorizar el inverso de vida, que salta una protección diferencial o térmica, tener en cuenta alimentar el equipo en línea diferente del inversor para que cuando se vaya la luz no lo dejes sin servicio. Si se quiere porque salta la protecciones generales es necesario ponerle un sistema Say o una pequeña batería para que se alimente en caso de pérdida de luz </p>
 
 
