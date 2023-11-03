@@ -10,7 +10,7 @@
 #include <UrlEncode.h>
 #include <WebServer.h>
 #include <WiFi.h>
-#include <EEPROM.h>
+#include <Preferences.h>
 //INICIO VARIABLES DE PANTALLA OLED
 
 #define SCREEN_WIDTH 128
@@ -25,7 +25,7 @@
 #define RX_RS485 16
 #define BAUD_RATE_RS485 9600
 #define DIR_ID_MODBUS 3
-#define ADDRESS_MODBUS 11015
+
 //FIN VARIABLES DE PANTALLA OLED
 
 #define NUM_TELEFONO_SMS 666666666
@@ -37,6 +37,7 @@ ModbusMaster node;
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 //VARIABLES GLOBALES Y FUNCIONES
+Preferences preferences;
 bool conexionWithInv=false;
 bool isSendMsg=false;
 String phoneNumberWhatapp = "+34648749355";
@@ -45,6 +46,7 @@ WiFiManager wm;
 String IpAsignada="";
 WebServer server(80);
 String marca="SALICRU";
+int ADDRESS_MODBUS= 11015;
 
 void printOLED(String marca,String inversor, String sim);
 void printOLEDmensaje(String msj);
@@ -58,11 +60,6 @@ void handle_OnConnect();
 void setSettings(); 
 //FIN VARIABLES GLOBALES 
 
-//CONSTANTES VALORES EEPROM
-#define SIZE_EEPROM 512
-#define DIR_MARCA 0
-
-
 
 void setup() {
   // Inicializa la comunicación Serie para la depuración
@@ -73,10 +70,6 @@ void setup() {
   node.begin(DIR_ID_MODBUS, Serial2); // El número 3 es la dirección del dispositivo Modbus
 
 //FIN CONFIGURACION DE LOS PUERTOS SERIAL
-
-//CONFIGURACION DE EEPROM
-EEPROM.begin(SIZE_EEPROM);
-
 
 //CONFIGURACION DE LOS PUERTOS SERIAL
 
@@ -99,17 +92,23 @@ printOLEDbienvenida();
     
   }
   else{
+
+    preferences.begin("inversor",false);
+    marca=preferences.getString("marca",marca);
+    phoneNumberWhatapp=preferences.getString("phoneNumberWhatapp",phoneNumberWhatapp);
+    apiKey=preferences.getString("apiKey",apiKey);
+    ADDRESS_MODBUS=preferences.getInt("ADDRESS_MODBUS",ADDRESS_MODBUS);
+    preferences.end();
+
     Serial.println("conectado");
     printOLEDmensaje("Cargando...");
     IpAsignada=WiFi.localIP().toString();
     //CONFIGURAMOS EL WEBSERVER PARA CONFIGURAR LOS VALORES DE REGISTROS
     server.on("/",handle_OnConnect);
     server.on("/settings", HTTP_GET, setSettings);
-
     server.onNotFound(handle_NotFound); 
     server.begin();
     Serial.println("Servidor HTTP iniciado");
-    Serial.println("m save:"+EEPROM.read(DIR_MARCA));
   }
   
 
@@ -307,9 +306,15 @@ String sendHtml(){
     phoneNumberWhatapp=server.arg(2);
     apiKey=server.arg(3);
     marca=server.arg(0);
+    ADDRESS_MODBUS= (server.arg(1)).toInt();
+  // guardamos la configuracion en la memoria para que no se borre al reniciar
+    preferences.begin("inversor",false);
+    preferences.putString("marca",marca);
+    preferences.putString("phoneNumberWhatapp",phoneNumberWhatapp);
+    preferences.putString("apiKey",apiKey);
+    preferences.putInt("ADDRESS_MODBUS",ADDRESS_MODBUS);
 
-    EEPROM.writeString(DIR_MARCA, marca);
-    EEPROM.commit();
+    preferences.end();
 
     Serial.println("Parametros actualizados..."); 
     server.send(200, "text/plain","Configuracion guardada");
