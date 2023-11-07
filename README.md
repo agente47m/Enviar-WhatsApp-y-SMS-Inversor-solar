@@ -51,6 +51,7 @@
 
 <h2>Como funciona</h2>
 <p> Cuando encendamos la primera vez nos aparecera un asistente que nos indicara los pasos a seguir para configurar el WIFI</p>
+![ASISTENTE-2](https://github.com/agente47m/Enviar-WhatsApp-y-SMS-Inversor-solar/assets/14801079/9cee3db3-1002-4d1d-a3a1-4db2ca2e722c)
 
 <p> Una vez configurado la wifi nos aparecera el estado de conexion con nuestro inversor como de nuestra tarjeta SIM en caso de tenerla conectada</p>
 
