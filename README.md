@@ -68,7 +68,7 @@
 
 <p> Por defecto viene la direccion modbus numero 11015,</p>
 <p> Si accedemos a la IP que nos muestra la pantalla se nos abrirar un asistente donde podremos meter el telefono para el aviso como la direccion MODBUS de los HZ de nuestro inversor </p>
-<p> IMPORTANTE! , el numero de telefono tiene que incluir el prefijo por ejemplo en España el "+34"</p>
+<p> 👉 IMPORTANTE! , el numero de telefono tiene que incluir el prefijo por ejemplo en España el "+34"</p>
 <p> Una vez configurado esto nuestro dispositivo hara el resto, comprar que el estado de conexion con el inversor sea "OK"</p>
 <h2>IMPORTANTE</h2>
 <p> Este sistema requiere que el inversor tenga puesta la dirección Mob número tres o cambiarlo en el código antes de subirlo </p>
