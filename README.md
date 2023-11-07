@@ -48,7 +48,16 @@
 
 <h2> vídeos de demostración</h2>
 <p> podemos ver un vídeo de demostración donde se muestra como se configura la red Wi-Fi y como se ve el envío de WhatsApp </p>
- 
+
+<h2>Como funciona</h2>
+<p> Cuando encendamos la primera vez nos aparecera un asistente que nos indicara los pasos a seguir para configurar el WIFI</p>
+
+<p> Una vez configurado la wifi nos aparecera el estado de conexion con nuestro inversor como de nuestra tarjeta SIM en caso de tenerla conectada</p>
+
+<p> Por defecto viene la direccion modbus numero XXXX,</p>
+<p> Si accedemos a la IP que nos muestra la pantalla se nos abrirar un asistente donde podremos meter el telefono para el aviso como la direccion MODBUS de los HZ de nuestro inversor </p>
+<p> IMPORTANTE! , el numero de telefono tiene que incluir el prefijo por ejemplo en España el "+34"</p>
+<p> Una vez configurado esto nuestro dispositivo hara el resto, comprar que el estado de conexion con el inversor sea "OK"</p>
 <h2>IMPORTANTE</h2>
 <p> este sistema requiere que el inversor tenga puesta la dirección Mob número tres o cambiarlo en el código antes de subirlo </p>
 <p> este sistema es compatible con otros sistema de monitorizacion ya instalados </p>
