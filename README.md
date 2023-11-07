@@ -32,7 +32,10 @@
 <p> la segunda parte hace referencia al ensamblado del procesador. En este caso será un ESP 32 encargado de todo el control del sistema</p>
 <p> por ultimo la tercera capa hace referencia a la capa de comunicacion, donde se situa el conversor de TTL a RS485.</p>
 
------------ Añadir fotografías_-------------
+![IMG_7843](https://github.com/agente47m/Enviar-WhatsApp-y-SMS-Inversor-solar/assets/14801079/fb89a59a-b281-4f69-a60e-9e56f6d8d8e8)
+
+![IMG_7838](https://github.com/agente47m/Enviar-WhatsApp-y-SMS-Inversor-solar/assets/14801079/f9d825f1-f3d7-4a1a-b4d2-7f527c002949)
+
 <h2> funcionalidades del proyecto </h2>
 <p> aquí veremos la foto dades que tiene este proyecto al día de hoy: </p>
 <li> la primera vez que inicia, se genera un web server que te permite escanear las redes del Wi-Fi y escoger la que tú quieras guardandola para posteriormente utilizarla. CREDENCIALES POR DEFECTO SSID: "AP-4705", CONTRASEÑA:"123456789"</li>
